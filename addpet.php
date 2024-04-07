@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
     </div>  
   </div>
 
-  <form method="post" action="<?php $_SERVER['PHP_SELF'] ?>">
+  <form method="post" action="<?php $_SERVER['PHP_SELF'] ?> onsubmit="return validateInput() ">
     <label for="nickname">Nickname:</label>
         <input type="text" id="nickname" name="nickname"><br><br>
 
