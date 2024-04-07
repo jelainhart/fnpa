@@ -14,7 +14,7 @@ nickname VARCHAR(32) NOT NULL,
 species VARCHAR(32) NOT NULL,  
 breed VARCHAR(32), 
 fur_color VARCHAR(32),
-fur_patten VARCHAR(32), 
+fur_pattern VARCHAR(32), 
 eye_color VARCHAR(32) NOT NULL, 
 pet_size VARCHAR(32) NOT NULL,
 additional_description VARCHAR(255),
@@ -34,6 +34,7 @@ PRIMARY KEY(animal_id));
 
 CREATE TABLE IF NOT EXISTS Stray(
 animal_id INT NOT NULL,
+nickname VARCHAR(32) NOT NULL,
 zip_code INT(5) NOT NULL,
 sociability VARCHAR(32),
 FOREIGN KEY (animal_id)  REFERENCES Animal(animal_id),
@@ -361,7 +362,7 @@ SELECT COUNT(*) FROM Stray;
 
 -- Basic SQL commands for the logic of our app
 -- When signing up for our site, a person can register their own informat and they will be added to the People’s table (insert statements shown above) and can update their information if it changes.
-UPDATE People SET primary_phone = '7035865445' WHERE person_id = 4;
+UPDATE People SET primary_phone_number = '7035865445' WHERE person_id = 4;
 
 --When a person registers their household, they can add people (insert statements shown above) and remove people or update the Is Part Of table in the event that someone moves to a different household. 
 DELETE FROM Is_part_of WHERE person_id = 3;
