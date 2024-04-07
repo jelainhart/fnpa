@@ -112,6 +112,9 @@ FOREIGN KEY (animal_id) REFERENCES Animal(animal_id),
 PRIMARY KEY(report_id));
 
 -- Insert data to the tables as if the site has been in use for a month
+INSERT INTO login(email, pwd)
+VALUE ('demo@demo.com', '$2y$10$7yMQ/KY5uHu1CwMBdptV5O12zpR9jJA4WcxAZxCT6zXIjyg8G4AWa');
+
 INSERT INTO Animal (species, breed, fur_color, fur_pattern, eye_color, pet_size, additional_description) VALUES
 ('Dog', 'Cocker Spaniel', 'Medium Brown', 'Patches', 'Brown', 'Medium', 'He always having the zoomies and likes to wiggle out of his harness'),
 ('Dog', 'Poodle', 'Black', 'Solid Color', 'Black', 'Large', 'They were chilling by the playground. No collar.'),
