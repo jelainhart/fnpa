@@ -30,10 +30,10 @@
 ////////////////////////////////////////////
 
 /** S24, PHP (on GCP, local XAMPP, or CS server) connect to MySQL (on local XAMPP) **/
-$username = ''; //kaq8eg
+$username = 'root'; //
 $password = ''; //
 $host = 'localhost:3306';
-$dbname = 'maintainence_requests';    
+$dbname = 'fnpa';    
 $dsn = "mysql:host=$host;dbname=$dbname";  
 ////////////////////////////////////////////
 
