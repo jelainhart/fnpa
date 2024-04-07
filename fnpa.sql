@@ -3,7 +3,7 @@
 -- Team: Esha Khator (kaq8eg), Rachel Ney-Grimm (ran5tcw), Jackie Lainhart (nyt8te)
 
 -- PART 1 Create tables
-CREATE TABLE login(
+CREATE TABLE  IF NOT EXISTS login(
                       email VARCHAR(200) NOT NULL,
                       pwd VARCHAR(200) NOT NULL,
                       PRIMARY KEY (email));
