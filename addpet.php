@@ -9,8 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
 {
   if (!empty($_POST['addPetBtn']))    // $_GET['....']
   {
-      addRequests($_POST['species'], $_POST['breed'], $_POST['fur_color'], $_POST['fur_pattern'], $_POST['eye_color'], $_POST['pet_size'], $_POST['additional_description'], $_POST['nickname']);
-      $list_of_requests = getAllRequests();
+      addPet($_POST['species'], $_POST['breed'], $_POST['fur_color'], $_POST['fur_pattern'], $_POST['eye_color'], $_POST['pet_size'], $_POST['additional_description'], $_POST['nickname']);
   }
 }
   ?>
@@ -362,26 +361,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
 
     <label for="additional_description">Additional Description:</label><br>
     <textarea id="additional_description" name="additional_description" rows="4" cols="50"></textarea><br><br>
-
-    <label for="condition">Condition:</label>
-    <select id="condition" name="condition">
-      <option value="malnourished">Malnourished</option>
-      <option value="sick">Sick</option>
-      <option value="injured">Injured</option>
-      <option value="tired">Tired</option>
-      <option value="healthy">Healthy</option>
-      <option value="unknown">Unknown</option>
-    </select><br><br>
-
-    <label for="sociability">Sociability:</label>
-    <select id="sociability" name="sociability">
-      <option value="friendly">Friendly - Okay to approach</option>
-      <option value="cautious">Cautious</option>
-      <option value="skittish">Skittish</option>
-      <option value="temperamental">Temperamental</option>
-      <option value="aggressive">Aggressive - Do not approach</option>
-      <option value="unknown">Unknown</option>
-    </select><br><br>
 
     <input type="submit" value="Submit" id="addPetBtn" name="addPetBtn class="btn btn-dark">
   </form>
