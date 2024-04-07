@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
     </div>  
   </div>
 
-  <form method="post" action="<?php $_SERVER['PHP_SELF'] ?>" onsubmit="return validateInput()">
+  <form method="post" action="addpet.php" >
     <label for="nickname">Nickname:</label>
         <input type="text" id="nickname" name="nickname"><br><br>
 
@@ -350,8 +350,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
       <option value="dark">Dark</option>
     </select><br><br>
 
-    <label for="size">Size:</label>
-    <select id="size" name="size">
+    <label for="pet_size">Size:</label>
+    <select id="pet_size" name="pet_size">
       <option value="very_small">Very Small (&lt;10 lbs)</option>
       <option value="small">Small (10-25 lbs)</option>
       <option value="medium">Medium (26-50 lbs)</option>
@@ -362,7 +362,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
     <label for="additional_description">Additional Description:</label><br>
     <textarea id="additional_description" name="additional_description" rows="4" cols="50"></textarea><br><br>
 
-    <input type="submit" value="Submit" id="addPetBtn" name="addPetBtn class="btn btn-dark">
+    <input type="submit" value="Submit" id="addPetBtn" name="addPetBtn" class="btn btn-dark">
   </form>
 </body>
 </html>
