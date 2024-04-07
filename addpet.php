@@ -1,3 +1,23 @@
+<?php 
+require("connect-db.php");    // include("connect-db.php");
+require("addpet-db.php");
+?>
+
+
+<?php 
+if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
+{
+  if (!empty($_POST['addPetBtn']))    // $_GET['....']
+  {
+      addRequests($_POST['species'], $_POST['breed'], $_POST['fur_color'], $_POST['fur_pattern'], $_POST['eye_color'], $_POST['pet_size'], $_POST['additional_description'], $_POST['nickname']);
+      $list_of_requests = getAllRequests();
+  }
+}
+  ?>
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -363,7 +383,7 @@
       <option value="unknown">Unknown</option>
     </select><br><br>
 
-    <input type="submit" value="Submit">
+    <input type="submit" value="Submit" id="addPetBtn" name="addPetBtn class="btn btn-dark">
   </form>
 </body>
 </html>
