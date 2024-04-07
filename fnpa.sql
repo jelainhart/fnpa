@@ -14,7 +14,7 @@ nickname VARCHAR(32) NOT NULL,
 species VARCHAR(32) NOT NULL,  
 breed VARCHAR(32), 
 fur_color VARCHAR(32),
-fur_patten VARCHAR(32), 
+fur_pattern VARCHAR(32), 
 eye_color VARCHAR(32) NOT NULL, 
 pet_size VARCHAR(32) NOT NULL,
 additional_description VARCHAR(255),
@@ -34,7 +34,8 @@ PRIMARY KEY(animal_id));
 
 CREATE TABLE IF NOT EXISTS Stray(
 animal_id INT NOT NULL,
-zip_code INT(5) NOT NULL,
+nickname VARCHAR(30) NOT NULL, 
+zip_code INT(5) NOT NULL, 
 sociability VARCHAR(32),
 FOREIGN KEY (animal_id)  REFERENCES Animal(animal_id),
 PRIMARY KEY(animal_id));
