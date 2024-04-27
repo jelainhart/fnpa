@@ -23,13 +23,13 @@ PRIMARY KEY (animal_id));
 CREATE TABLE IF NOT EXISTS Pets(
 animal_id INT NOT NULL, 
 nickname VARCHAR(30) NOT NULL, 
-FOREIGN KEY (animal_id) REFERENCES Animal(animal_id), 
+FOREIGN KEY (animal_id) REFERENCES Animal(animal_id) ON DELETE CASCADE, 
 PRIMARY KEY (animal_id));
 
 CREATE TABLE IF NOT EXISTS Lost_animal(
 animal_id INT NOT NULL, 
 pet_condition VARCHAR(255) NOT NULL,
-FOREIGN KEY (animal_id) REFERENCES Animal(animal_id),
+FOREIGN KEY (animal_id) REFERENCES Animal(animal_id) ON DELETE CASCADE,
 PRIMARY KEY(animal_id));
 
 CREATE TABLE IF NOT EXISTS Stray(
@@ -37,7 +37,7 @@ animal_id INT NOT NULL,
 nickname VARCHAR(30) NOT NULL, 
 zip_code INT(5) NOT NULL, 
 sociability VARCHAR(32),
-FOREIGN KEY (animal_id)  REFERENCES Animal(animal_id),
+FOREIGN KEY (animal_id)  REFERENCES Animal(animal_id) ON DELETE CASCADE,
 PRIMARY KEY(animal_id));
 
 CREATE TABLE IF NOT EXISTS Household(
@@ -64,7 +64,7 @@ animal_id INT NOT NULL,
 date DATETIME NOT NULL,
 description VARCHAR(255),
 PRIMARY KEY(report_id),
-FOREIGN KEY (animal_id)  REFERENCES Animal(animal_id),
+FOREIGN KEY (animal_id)  REFERENCES Animal(animal_id) ON DELETE CASCADE,
 FOREIGN KEY (person_id) REFERENCES People(person_id));
 
 CREATE TABLE IF NOT EXISTS Found_reports(
@@ -94,7 +94,7 @@ PRIMARY KEY(comment_id));
 CREATE TABLE IF NOT EXISTS Owns(
 animal_id INT NOT NULL,
 household_id INT NOT NULL,
-FOREIGN KEY (animal_id)  REFERENCES Animal(animal_id),
+FOREIGN KEY (animal_id)  REFERENCES Animal(animal_id) ON DELETE CASCADE,
 FOREIGN KEY (household_id)  REFERENCES Household(household_id),
 PRIMARY KEY(animal_id));
 
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS Pet_sightings(
 report_id INT NOT NULL,
 animal_id INT NOT NULL,
 FOREIGN KEY (report_id) REFERENCES Reports(report_id),
-FOREIGN KEY (animal_id) REFERENCES Animal(animal_id),
+FOREIGN KEY (animal_id) REFERENCES Animal(animal_id) ON DELETE CASCADE,
 PRIMARY KEY(report_id));
 
 -- Insert data to the tables as if the site has been in use for a month
@@ -200,8 +200,8 @@ VALUES
 (5, 'Dritan', 1109, 'Charlottesville', 'St. Clair Avenue', 22901),
 (6, 'House A', 1312, 'Dungannon', 'Sweetspice Street', 24245),
 (7, 'Seydoux', 1482, 'Virginia Beach', 'Tates Creek Road', 23451),
-(8, 'Ramp', 304, 'The Plains', 'Swenson Court', 1002),
-(9, 'Yuan', 7202, 'Amherst', '10th Street East', 1059),
+(8, 'Ramp', 304, 'The Plains', 'Swenson Court', 22904),
+(9, 'Yuan', 7202, 'Amherst', '10th Street East', 22903),
 (10, 'Gáspár', 4199, 'Bridgewater', 'Clinton Avenue', 22030),
 (11, 'Najib', 442, 'Eastville', 'Canterbury Road', 22192),
 (12, 'Nam', 203, 'Centreville', 'Merryweather St.', 20102);
@@ -362,39 +362,39 @@ SELECT COUNT(*) FROM Stray;
 
 -- Basic SQL commands for the logic of our app
 -- When signing up for our site, a person can register their own informat and they will be added to the People’s table (insert statements shown above) and can update their information if it changes.
-UPDATE People SET primary_phone = '7035865445' WHERE person_id = 4;
+UPDATE People SET primary_phone_number = '7035865445' WHERE person_id = 4;
 
---When a person registers their household, they can add people (insert statements shown above) and remove people or update the Is Part Of table in the event that someone moves to a different household. 
+-- When a person registers their household, they can add people (insert statements shown above) and remove people or update the Is Part Of table in the event that someone moves to a different household. 
 DELETE FROM Is_part_of WHERE person_id = 3;
 UPDATE Is_part_of SET household_id = 7 WHERE person_id = 13;
 
---A person can insert (seen above) or delete or update rows in the Owns table in the case of registering a new pet with their household, a pet dying, or a pet being given away to a different household.
+-- A person can insert (seen above) or delete or update rows in the Owns table in the case of registering a new pet with their household, a pet dying, or a pet being given away to a different household.
 DELETE FROM Owns WHERE animal_id = 14;
 UPDATE Owns SET household_id = 9 WHERE animal_id = 23;
 
---A user updating the attributes of their animal, for example, as it grows its pet_size or eye color might change
+-- A user updating the attributes of their animal, for example, as it grows its pet_size or eye color might change
 UPDATE Animal
-SET eye_color=Green, pet_size=Small, additional_description= 'he is an old man cat now'
+SET eye_color='Green', pet_size='Small', additional_description= 'he is an old man cat now'
 WHERE animal_id = 13;
 
---A user can retrieve all pet sighting reports so users can browse these to look for theirs.
+-- A user can retrieve all pet sighting reports so users can browse these to look for theirs.
 SELECT * FROM Reports JOIN Found_reports JOIN pet_sightings JOIN Animal JOIN Lost_animal;
 
---Retrieve all pet sighting reports that concern animals with certain characteristics. These will be variables the user indicates through select boxes on the front end. So it can be about the animal’s species, breed, fur_color, fur_pattern, eye_color, pet_size, or location. This is an example of one such query.
+-- Retrieve all pet sighting reports that concern animals with certain characteristics. These will be variables the user indicates through select boxes on the front end. So it can be about the animal’s species, breed, fur_color, fur_pattern, eye_color, pet_size, or location. This is an example of one such query.
 SELECT * 
 FROM Reports JOIN Found_reports JOIN pet_sightings JOIN Animal JOIN Lost_animal
 WHERE species= 'cat' AND fur_color= 'Black' AND pet_size= 'Very Small';
 
---If an animal dies the user can delete their animal from the site.
+-- If an animal dies the user can delete their animal from the site.
 DELETE FROM Animal WHERE animal_id = 13;
 
---When a lost pet is found and retrieved by the owner, the lost report created by the owner can be deleted.
+-- When a lost pet is found and retrieved by the owner, the lost report created by the owner can be deleted.
 DELETE FROM Comments WHERE report_id IN (
 SELECT report_id FROM Reports 
 WHERE animal_id = 27);
 DELETE FROM Reports WHERE animal_id = 27;
 
---Advanced SQL
+-- Advanced SQL
 -- A check to see if zip codes entered are within the 20000s because the scope of our project is just Virginia cities. 20040-24658
 
 ALTER TABLE household
