@@ -1,9 +1,9 @@
 <?php
-function addPet($species, $breed, $fur_color, $fur_pattern, $eye_color, $size, $additional_description, $nickname)
+function addPet($species, $breed, $fur_color, $fur_pattern, $eye_color, $pet_size, $additional_description, $nickname)
 {
    global $db;        // ensure proper data type before inserting it into a db
    
-   $animal_query = "INSERT INTO Animal (species, breed, fur_color, fur_pattern, eye_color, size, additional_description) VALUES (:species, :breed, :fur_color, :fur_pattern, :eye_color, :pet_size, :additional_description)";  
+   $animal_query = "INSERT INTO Animal (species, breed, fur_color, fur_pattern, eye_color, pet_size, additional_description) VALUES (:species, :breed, :fur_color, :fur_pattern, :eye_color, :pet_size, :additional_description)";  
    $pets_query = "INSERT INTO Pets (nickname) VALUES (:nickname)";
    
    try { 
@@ -16,7 +16,7 @@ function addPet($species, $breed, $fur_color, $fur_pattern, $eye_color, $size, $
       $statement->bindValue(':fur_color',$fur_color);
       $statement->bindValue(':fur_pattern', $fur_pattern);
       $statement->bindValue(':eye_color', $eye_color);
-      $statement->bindValue(':pet_size',$size);
+      $statement->bindValue(':pet_size',$pet_size);
       $statement->bindValue(':additional_description', $additional_description);
       $statement->bindValue(':eye_color', $eye_color);
       // exe
