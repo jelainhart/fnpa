@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS People(
 person_id INT AUTO_INCREMENT, 
 first_name VARCHAR(32) NOT NULL,
 last_name VARCHAR(32)  NOT NULL,
-primary_phone_number INT(10)  NOT NULL,
+primary_phone_number VARCHAR(32)  NOT NULL,
 email_address VARCHAR(32)  NOT NULL,
 PRIMARY KEY(person_id));
 
