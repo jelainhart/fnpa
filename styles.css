@@ -70,3 +70,13 @@ footer {
   padding: 10px;
 }
 
+.btn {
+  background-color: #405aa8;
+  color: #fff;
+  border-color: #405aa8;
+}
+
+.btn:hover {
+  background-color: #aabbee; 
+  border-color: #405aa8;
+}

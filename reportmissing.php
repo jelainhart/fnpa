@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
   
   <style>
         body {
-            background-color: #b1defa;
+            background-color: #aabbee;
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -48,14 +48,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
         }
 
         .btn {
-            background-color: #209ae6;
+            background-color: #405aa8;
             color: #fff;
-            border-color: #85c7f2;
+            border-color: #405aa8;
         }
 
         .btn:hover {
-            background-color: #78c8fa; 
-            border-color: #6cb4df;
+            background-color: #aabbee; 
+            border-color: #405aa8;
         }
 
         .form-control {
