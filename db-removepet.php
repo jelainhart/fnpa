@@ -3,7 +3,6 @@ function removePet($animal_id)
 {
     global $db;
    $query = "DELETE FROM animal where animal_id=:animal_id;";
-   
    $statement = $db->prepare($query); //compile
    $statement->bindValue(':animal_id', $animal_id);
    $statement->execute();

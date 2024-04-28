@@ -15,14 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 ?>
 
 <?php
-// if ($_SERVER['REQUEST_METHOD'] == 'POST') 
-// {
-//     if (!empty($_POST['emailBtn'])) 
-//     {
-//         var_dump($_POST['email']);
-//         updateEmail($_POST['email'], $_POST['person_id']);
-//     }
-// }
+$household = getHousehold($_SESSION["person_id"]);
+//var_dump($household) ;
 ?>
 
 
@@ -53,21 +47,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     <div class="col">
       <h2>Household </h2>
       <h6>to do: code to join a household (if not done as part of initial sign up)<br>
-        otherwise, display other members of the household on this page<br>
         
         <br> 
       </h6>
 
-<!-- update email-->
-      <!-- <div class="card" style="width: 600px; margin-top:55px;margin-left:300px; text-align: center; padding:20px; background-color:#c7d5fc;border:7px #5d78c9; border-radius:10px;">
-                
-        <form method="post" action="household.php">          
-            <input type="hidden" name="person_id" id="person_id" value="<?php echo $_SESSION['person_id']; ?>">
-            <label for="email">Update Email:</label>
-            <input type="email" id="email" name="email" style="margin-left:10px" placeholder="Enter new email">
-            <button type="submit" id="emailBtn" name="emailBtn" style="color: #3250ab; text-align:left; border: 2px solid #c7d5fc; border-radius:  5px;">Update</button>
-        </form>
-    </div> -->
+<!-- display household members-->      
+      <div class="card" style="width: 700px; margin-top:55px;margin-left:250px; text-align: center; padding:20px; background-color:#c7d5fc;border:7px #5d78c9; border-radius:10px;">
+        <h4><b>My Household: <?php $desired_household = $household[0]; echo $desired_household['household_name']; ?> </b></h4>
+        <p><?php echo $desired_household['street_number']; ?> <?php echo $desired_household['street_name']; ?>, <?php echo $desired_household['city']; ?> VA <?php echo $desired_household['zip_code']; ?></p>
+        <h5>Members:</h5>
+        <table style="text-align: center; background-color:#aabbee; margin: 5px;padding:15px;  border-radius:5px;">
+        <tr><td><b>Name</b></td><td><b>Phone Number</b></td><td><b>Email Address</b></td></tr>
+        <?php foreach ($household as $hh): ?>
+            <tr>
+            <td><?php echo $hh['first_name']; ?> <?php echo $hh['last_name']; ?> </td>
+            <td><?php echo $hh['primary_phone_number']; ?> <td>                
+            <td><?php echo $hh['email_address']; ?> <td>
+        </tr>
+        <?php endforeach; ?>  
+        <tr> <td><br> </td> <td><br> </td> <td> <br></td> </tr>
+        </table>       
+    </div>
 <!-- update phone-->
     <div class="card" style="width: 600px; margin-top:55px;margin-left:300px; text-align: center; padding:20px; background-color:#c7d5fc;border:7px #5d78c9; border-radius:10px;">
             <form method="post" action="household.php">
@@ -79,8 +79,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         </div>
     </div> 
     
-    <div class="card" style="width: 600px; margin-top:55px;margin-left:300px; text-align: center; padding:20px; background-color:#c7d5fc;border:7px #5d78c9; border-radius:10px;">
-    <a href="removepet.php" style="margin:10px;" class="btn btn-lg">Remove a Pet</a>
+    <div class="card" style="width: 300px; margin-top:55px;margin-left:450px; text-align: center; padding:1 px; background-color:#c7d5fc;border:7px #5d78c9; border-radius:10px;">
+    <a href="removepet.php" style="margin:10px; color:red" class="btn">Remove a Pet</a>
 </div>
   
 </body>

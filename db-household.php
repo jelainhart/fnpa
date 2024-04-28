@@ -15,17 +15,18 @@ function updatePhone($phone, $person_id)
 // ?>
 
 
-
 <?php
-// function updateEmail($email, $person_id)
-// {
-//     global $db;
+function getHousehold($person_id)//get all member of the household the user is in
+{ 
+    global $db;
+    $query = "SELECT household_name, email_address, first_name, last_name, primary_phone_number, city, street_name,street_number, zip_code FROM people natural join is_part_of natural join household WHERE household_id IN ( SELECT household_id FROM is_part_of WHERE person_id = :person_id );";
+    $statement = $db->prepare($query); //compile
     
-//         $query = "UPDATE people SET email_address=:email WHERE person_id=:person_id";
-//         $statement = $db->prepare($query);
-//         $statement->bindValue(':email', $email);
-//         $statement->bindValue(':person_id', $person_id);
-//         $statement->execute();
-//         $statement->closeCursor();
-//     }
+    $statement->bindValue(':person_id', $person_id);
+    $statement->execute();
+    $result = $statement->fetchAll(); //fetch() just retrieves only the first row
+    $statement->closeCursor(); 
+ //if we want to use result must officially return it to form
+     return $result;
+}
 // ?>
