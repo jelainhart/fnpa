@@ -1,9 +1,8 @@
 <?php
 require("connect-db.php");
 
-function searchPets($criteria) {
+function searchPets($criteria, $nickname) {
     global $db;
-    //print_r($criteria);
 
     $sql = "SELECT A.*, 
             P.nickname AS pet_nickname, 
@@ -49,6 +48,9 @@ function searchPets($criteria) {
     if ($criteria['pet_size'] !== "Any") {
         $sql .= " AND pet_size = :pet_size";
     }
+    if (!empty($nickname)) {
+        $sql .= " AND (P.nickname = :nickname OR S.nickname = :nickname)";
+    }
 
     $statement = $db->prepare($sql);
 
@@ -70,9 +72,12 @@ function searchPets($criteria) {
     if ($criteria['pet_size'] !== "Any") {
         $statement->bindValue(':pet_size', $criteria['pet_size']);
     }
+    if (!empty($nickname)) {
+        $statement->bindValue(':nickname', $nickname);
+    }
+
     $statement->execute();
     $animals = $statement->fetchAll(PDO::FETCH_ASSOC);
-    //print_r($animals);
     return $animals;
 }
 ?>
