@@ -14,9 +14,9 @@ require("login-db.php");
 </head>
 <body>
   
-  <?php include('header.html') ?>
-  
-  <div>  
+  <?php include('header2.html') ?>
+  <div >
+  <div style="width: 500px; margin-top: 10px; margin-left:50px; padding:20px; display: inline-block;">  
     <h1>Log in</h1>
     <form action="login.php" method="post">     
       Email: <input type="text" name="email" required /> <br/>
@@ -82,6 +82,11 @@ authenticate();
 
 ?>
     </div>
+    
+    <div style="width: 350px; margin-left:50px; text-align: center; padding:10px; display: inline-block;">
+      <img src="spidercatlogo.png" alt="Spider-Cat">
+    </div>
+</div>
 
   
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

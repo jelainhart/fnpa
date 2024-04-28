@@ -117,7 +117,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
                   </div>
                 <?php endforeach; ?> 
                 </div>
-
+                <div style="width: 450px; margin-top: 10px; margin-left:300px; text-align: center; padding:20px;">
+                  <img src="spidercatlogo.png" alt="Spider-Cat">
+                </div>
              </div>
         </div>
   </div>
