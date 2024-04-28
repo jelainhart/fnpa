@@ -4,10 +4,9 @@
 function addComment($report_id, $person_id, $comment){
     //Comments(comment_id, report_id, person_id, text, date)
     global $db;
-    $query = "INSERT INTO comments (text, date, report_id, person_id) VALUES (:comment , NOW(), :report_id, :person_id)";
+    $query = "INSERT INTO comments (`text`, `date`, report_id, person_id) VALUES (:comment, NOW(), :report_id, :person_id)";
     
    try {
-    $db->beginTransaction();
     // Insert into Comments table
     $statement = $db->prepare($query);
     $statement->bindValue(':report_id', $report_id);
@@ -15,8 +14,7 @@ function addComment($report_id, $person_id, $comment){
     $statement->bindValue(':comment', $comment);
     $statement->execute();
     $statement->closeCursor();
-
-    $db->commit();
+    
 
  } catch (PDOException $e) {
     $db->rollBack();

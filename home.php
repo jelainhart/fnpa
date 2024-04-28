@@ -14,10 +14,9 @@ $myPets = getMyPets($_SESSION["person_id"]);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
 {
-  if (!empty($_POST['commentBtn']))    // $_GET['....']
-  {
+  
       addComment($_POST['report_id'], $_POST['person_id'], $_POST['comment']);
-  }
+  
 }
   ?>
 
