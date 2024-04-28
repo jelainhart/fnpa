@@ -2,11 +2,16 @@
 require("connect-db.php"); //include("connect-db.php"); start db server if wa
 require("db-home.php");
 
+//<!--------------------------- Session ID CURRENTLY HARDCODED ------------------>
 session_start();
 $_SESSION["person_id"] = "2"
 ?>
 
 <?php 
+
+$myPets = getMyPets($_SESSION["person_id"]); 
+//var_dump($myPets);
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
 {
   if (!empty($_POST['commentBtn']))    // $_GET['....']
@@ -56,20 +61,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
     
   <?php include('header.html') ?>
   <div class="container">
-    <h1 style="
-  font-size: 300%">Welcome! <?php
-echo  $_SESSION["person_id"] ;?> </h1> 
+    <h1 style="margin-top:12px; font-size: 300%">Welcome! </h1> 
   </div>
 
   <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 ">
                 <!-- Left half of the screen -->
-                <h2 style="margin-left:100px; color:#425dad;" class=" text-center">Recent Sightings</h2>
+                <h2 style=" margin-left:100px; color:#3250ab;" class=" text-center">Recent Sightings</h2>
                                                          
                 <?php foreach ($recentSightings as $rs): ?>
                   
-                  <div class="card" style="width: 450px; margin: 80px; text-align: center; padding:20px; background-color:#5d78c9;border:7px ; border-radius:10px;">
+                  <div class="card" style="width: 450px; margin: 20px; text-align: center; padding:20px; background-color:#5d78c9;border:7px ; border-radius:10px;">
                     <p><b><?php echo $rs['species']; ?> Sighting!</b></p>
                     <p>A <?php echo $rs['pet_size']; ?> <?php echo $rs['breed']; ?> with <?php echo $rs['fur_pattern']; ?>, <?php echo $rs['fur_color']; ?> fur and <?php echo $rs['eye_color']; ?> eyes.</p>
                     <p><?php echo $rs['pet_condition']; ?> Condition. <?php echo $rs['additional_description']; ?></p>
@@ -95,18 +98,25 @@ echo  $_SESSION["person_id"] ;?> </h1>
             </div>
             <div class="col-md-6" >
                 <!-- Right half of the screen with button -->
-                <div class="button-container" style="width:650px; margin: 80px; align: center;  ">
-                  <a href="addpet.php" class="btn btn-lg">Manage My Household</a>
+                <div class="card" style="width: 450px; margin-top:55px;margin-left:300px; text-align: center; padding:20px; background-color:#c7d5fc;border:7px #5d78c9; border-radius:10px;">
+                
+                  <a href="household.php" style="margin:10px;" class="btn btn-lg">Manage My Household</a>
+                
+
+
+                  <a href="addpet.php" style="margin:10px;" class="btn btn-lg">Register new Pet</a>
+                
                 </div>
 
-
-                <div class="button-container" style="width: 650px; margin: 80px; text-align: center;  ">
-                  <a href="addpet.php" class="btn btn-lg">Register new Pet</a>
-                </div>
-
-                <div class="card" style="width: 450px; margin-left:300px; text-align: center; padding:20px; background-color:#5d78c9;border:7px ; border-radius:10px;">
+                <div class="card" style="width: 450px; margin-top: 10px; margin-left:300px; text-align: center; padding:20px; background-color:#c7d5fc;border:7px #5d78c9; border-radius:10px;">
                 <h3> My Pets </h3>
-                  <p>PLACEHOLDER (this is where the person's pets will be displayed, once session_id setup) </p> <!-- code like getPets function for reportmissing -->
+                <?php foreach ($myPets as $mp): ?>
+                  <div class="card" style="width: 390px; padding:20px; background-color:#899fe0;text-align: center; border:7px ; border-radius:10px;">
+                    <p><b><?php echo $mp['nickname']; ?> </b></p>
+                    <p>A <?php echo $mp['pet_size']; ?> sized <?php echo $mp['breed']; ?> with <?php echo $mp['fur_pattern']; ?>, <?php echo $mp['fur_color']; ?> fur and <?php echo $mp['eye_color']; ?> eyes.</p>
+                    <p><?php echo $mp['additional_description']; ?> </p>
+                  </div>
+                <?php endforeach; ?> 
                 </div>
 
              </div>
