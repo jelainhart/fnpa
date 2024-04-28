@@ -10,7 +10,6 @@ CREATE TABLE  IF NOT EXISTS login(
 					  
 CREATE TABLE IF NOT EXISTS Animal(
 animal_id INT AUTO_INCREMENT, 
-nickname VARCHAR(32) NOT NULL, 
 species VARCHAR(32) NOT NULL,  
 breed VARCHAR(32), 
 fur_color VARCHAR(32),

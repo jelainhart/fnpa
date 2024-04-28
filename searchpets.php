@@ -1,84 +1,17 @@
-<?php 
-require("connect-db.php");    // include("connect-db.php");
-require("addpet-db.php");
+<?php
+require("connect-db.php");    // Include the file to establish database connection
+require("searchpets-db.php"); // Include the file containing search functionality
 ?>
-
-
-<?php 
-if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
-{
-  if (!empty($_POST['addPetBtn']))    // $_GET['....']
-  {
-      addPet($_POST['species'], $_POST['breed'], $_POST['fur_color'], $_POST['fur_pattern'], $_POST['eye_color'], $_POST['pet_size'], $_POST['additional_description'], $_POST['nickname']);
-  }
-}
-  ?>
-
-
 
 
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">    
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Register your pet">
-  <meta name="keywords" content="Pet Finder, register pet">
-  
-  <title>Register Pet</title>
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">  
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">   
-
-  <style>
-        body {
-            background-color: #b1defa;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            color: #333; /* Dark gray for headings */
-        }
-
-        .container {
-            background-color: #fff; /* White container background */
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-            padding: 20px;
-            margin-top: 20px;
-        }
-
-        .btn {
-            background-color: #209ae6;
-            color: #fff;
-            border-color: #85c7f2;
-        }
-
-        .btn:hover {
-            background-color: #78c8fa; 
-            border-color: #6cb4df;
-        }
-
-        .form-control {
-            background-color: #f9f9f9; 
-            border-color: #ddd;
-        }
-    </style>
+    <title>Search Pets</title>
 </head>
-
-<body> 
-  
-<?php include('header.html') ?>
-<div class="container">
-  <div class="row g-3 mt-2">
-    <div class="col">
-      <h2>Register a Pet</h2>
-    </div>  
-  </div>
-
-  <form method="post" action="addpet.php" >
-    <label for="nickname">Nickname:</label>
-        <input type="text" id="nickname" name="nickname"><br><br>
-
+<body>
+    <h2>Search Pets</h2>
+    <form method="post" action="searchpets.php">
     <label for="species">Species:</label>
     <select id="species" name="species">
       <option value="Dog">Dog</option>
@@ -87,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
     <label for="breed">Breed:</label>
     <select id="breed" name="breed">
       <optgroup label="Dog Breeds">
+        <option value="Any">Any</option>
         <option value="Chihuahua">Chihuahua</option>
         <option value="Japanese Spaniel">Japanese Spaniel</option>
         <option value="Maltese Dog">Maltese Dog, Maltese Terrier, Maltese</option>
@@ -242,6 +176,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
         <option value="Cane Corso">Cane Corso</option>
         <option value="Cardigan Welsh Corgi">Cardigan Welsh Corgi</option>
       <optgroup label="Cat Breeds">
+        <option value="Any">Any</option>
         <option value="Abyssinian">Abyssinian</option>
         <option value="Aegean">Aegean</option>
         <option value="American Curl">American Curl</option>
@@ -345,70 +280,112 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
     
     <label for="fur_color">Fur Color:</label>
     <select id="fur_color" name="fur_color">
-      <option value="White">White</option>
-      <option value="Cream">Cream</option>
-      <option value="Golden">Golden</option>
-      <option value="Orange">Orange</option>
-      <option value="Light Brown">Light Brown</option>
-      <option value="Medium Brown">Medium Brown</option>
-      <option value="Dark Brown">Dark Brown</option>
-      <option value="Black">Black</option>
-      <option value="Light Gray">Light Gray</option>
-      <option value="Dark Gray">Dark Gray</option>
-      <option value="Blue">Blue</option>
-      <option value="None">None</option>
+        <option value="Any">Any</option>
+        <option value="White">White</option>
+        <option value="Cream">Cream</option>
+        <option value="Golden">Golden</option>
+        <option value="Orange">Orange</option>
+        <option value="Light Brown">Light Brown</option>
+        <option value="Medium Brown">Medium Brown</option>
+        <option value="Dark Brown">Dark Brown</option>
+        <option value="Black">Black</option>
+        <option value="Light Gray">Light Gray</option>
+        <option value="Dark Gray">Dark Gray</option>
+        <option value="Blue">Blue</option>
+        <option value="None">None</option>
     </select><br><br>
 
     <label for="fur_pattern">Fur Pattern:</label>
     <select id="fur_pattern" name="fur_pattern">
-      <option value="Patches">Patches</option>
-      <option value="Speckled">Speckled</option>
-      <option value="Spotted">Spotted</option>
-      <option value="Striped">Striped</option>
-      <option value="Tabby">Tabby</option>
-      <option value="Tortoiseshell">Tortoiseshell</option>
-      <option value="Calico">Calico</option>
-      <option value="Bi-color">Bi-color</option>
-      <option value="Color Point">Color Point</option>
-      <option value="Solid Color">Solid Color</option>
+        <option value="Any">Any</option>
+        <option value="Patches">Patches</option>
+        <option value="Speckled">Speckled</option>
+        <option value="Spotted">Spotted</option>
+        <option value="Striped">Striped</option>
+        <option value="Tabby">Tabby</option>
+        <option value="Tortoiseshell">Tortoiseshell</option>
+        <option value="Calico">Calico</option>
+        <option value="Bi-color">Bi-color</option>
+        <option value="Color Point">Color Point</option>
+        <option value="Solid Color">Solid Color</option>
     </select><br><br>
 
     <label for="eye_color">Eye Color:</label>
     <select id="eye_color" name="eye_color">
-      <option value="Blue">Blue</option>
-      <option value="Brown">Brown</option>
-      <option value="Black">Black</option>
-      <option value="Gray">Gray</option>
-      <option value="Green">Green</option>
-      <option value="Yellow">Yellow</option>
-      <option value="Orange">Orange</option>
-      <option value="Red">Red</option>
-      <option value="Heterochromia">Heterochromia</option>
-      <option value="Light">Light</option>
-      <option value="Dark">Dark</option>
+        <option value="Any">Any</option>
+        <option value="Blue">Blue</option>
+        <option value="Brown">Brown</option>
+        <option value="Black">Black</option>
+        <option value="Gray">Gray</option>
+        <option value="Green">Green</option>
+        <option value="Yellow">Yellow</option>
+        <option value="Orange">Orange</option>
+        <option value="Red">Red</option>
+        <option value="Heterochromia">Heterochromia</option>
+        <option value="Light">Light</option>
+        <option value="Dark">Dark</option>
     </select><br><br>
 
     <label for="pet_size">Size:</label>
     <select id="pet_size" name="pet_size">
-<<<<<<< HEAD
-      <option value="very_small">Very Small (&lt;10 lbs)</option>
-      <option value="small">Small (10-25 lbs)</option>
-      <option value="medium">Medium (26-50 lbs)</option>
-      <option value="large">Large (51-100 lbs)</option>
-      <option value="very_large">Very Large (&gt;100 lbs)</option>
-=======
-      <option value="Very Small">Very Small (&lt;10 lbs)</option>
-      <option value="Small">Small (10-25 lbs)</option>
-      <option value="Medium">Medium (26-50 lbs)</option>
-      <option value="Large">Large (51-100 lbs)</option>
-      <option value="Very Large">Very Large (&gt;100 lbs)</option>
->>>>>>> jackie
+        <option value="Any">Any</option>
+        <option value="Very Small">Very Small (&lt;10 lbs)</option>
+        <option value="Small">Small (10-25 lbs)</option>
+        <option value="Medium">Medium (26-50 lbs)</option>
+        <option value="Large">Large (51-100 lbs)</option>
+        <option value="Very Large">Very Large (&gt;100 lbs)</option>
     </select><br><br>
 
-    <label for="additional_description">Additional Description:</label><br>
-    <textarea id="additional_description" name="additional_description" rows="4" cols="50"></textarea><br><br>
+        
+        <input type="submit" name="search" value="Search">
+    </form>
 
-    <input type="submit" value="Submit" id="addPetBtn" name="addPetBtn" class="btn btn-dark">
-  </form>
+    <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $searchCriteria = array(
+                'species' => $_POST['species'],
+                'breed' => $_POST['breed'],
+                'fur_color' => $_POST['fur_color'],
+                'fur_pattern' => $_POST['fur_pattern'],
+                'eye_color' => $_POST['eye_color'],
+                'pet_size' => $_POST['pet_size']
+            );
+        
+            $animals = searchPets($searchCriteria);
+
+            foreach ($animals as $animal) {
+                //echo "Animal ID: " . $animal['animal_id'] . "<br>";
+                echo "Species: " . $animal['species'] . "<br>";
+                echo "Breed: " . $animal['breed'] . "<br>";
+                echo "Fur Color: " . $animal['fur_color'] . "<br>";
+                echo "Fur Pattern: " . $animal['fur_pattern'] . "<br>";
+                echo "Eye Color: " . $animal['eye_color'] . "<br>";
+                echo "Size: " . $animal['pet_size'] . "<br>";
+
+                // Check if the animal is a pet
+                if (!empty($animal['pet_nickname'])) {
+                    echo "Nickname: " . $animal['pet_nickname'] . "<br>";
+                    echo "\n" . "<br>";
+                }
+                // Check if the animal is a lost animal
+                elseif (!empty($animal['pet_condition'])) {
+                    echo "Condition: " . $animal['pet_condition'] . "<br>";
+                    echo "\n" . "<br>";
+                }
+                // Check if the animal is a stray
+                elseif (!empty($animal['stray_nickname'])) {
+                    echo "Stray Nickname: " . $animal['stray_nickname'] . "<br>";
+                    echo "Zip Code: " . $animal['zip_code'] . "<br>";
+                    echo "Sociability: " . $animal['sociability'] . "<br>";
+                    echo "\n" . "<br>";
+                }
+                // If none of the above conditions are met, display a generic message
+                else {
+                    echo "Animal information not available.<br>";
+                    echo "\n" . "<br>";
+                }
+            }
+        } 
+    ?>
 </body>
 </html>
