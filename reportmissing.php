@@ -76,6 +76,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
   </div>
 <!-- TODO!!!!! get the user's person_id, create dropdown of the user's pets for them to choose which is lost -->
   <form method="post" action="reportmissing.php"> 
+    
+    <input type="hidden" name="person_id" id="person_id" value="<?php echo $_SESSION['person_id']; ?>">
     <label for="animal_name">Animal Name:</label>
     <select id="animal_name" name="animal_name">
         <option value="animal_id">nickname</option>

@@ -72,6 +72,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
       <h2>Report a Sighting of a Lost Pet</h2>
       <br>
   </div>
+  
+  <input type="hidden" name="person_id" id="person_id" value="<?php echo $_SESSION['person_id']; ?>">
   <div id="animal_desc">
     <h4>Animal Description</h4>
   <form method="post" action="addpet.php" >

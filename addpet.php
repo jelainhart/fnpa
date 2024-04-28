@@ -391,19 +391,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
 
     <label for="pet_size">Size:</label>
     <select id="pet_size" name="pet_size">
-<<<<<<< HEAD
-      <option value="very_small">Very Small (&lt;10 lbs)</option>
-      <option value="small">Small (10-25 lbs)</option>
-      <option value="medium">Medium (26-50 lbs)</option>
-      <option value="large">Large (51-100 lbs)</option>
-      <option value="very_large">Very Large (&gt;100 lbs)</option>
-=======
       <option value="Very Small">Very Small (&lt;10 lbs)</option>
       <option value="Small">Small (10-25 lbs)</option>
       <option value="Medium">Medium (26-50 lbs)</option>
       <option value="Large">Large (51-100 lbs)</option>
       <option value="Very Large">Very Large (&gt;100 lbs)</option>
->>>>>>> jackie
     </select><br><br>
 
     <label for="additional_description">Additional Description:</label><br>

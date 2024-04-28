@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
 {
   if (!empty($_POST['commentBtn']))    // $_GET['....']
   {
-      addComment(, $_POST['report_id'], $_POST['comment']);
+      addComment($_POST['report_id'], $_POST['person_id'], $_POST['comment']);
   }
 }
   ?>
@@ -70,6 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
                     <div style="background-color:#aabbee;width:250px;border: 4px solid white; border-radius: 3px; padding:0px">
                       <form method="post" action="home.php">
                         <input type="hidden" name="report_id" id="report_id" value="<?php echo $rs['report_id']; ?>">
+                        <input type="hidden" name="person_id" id="person_id" value="<?php echo $_SESSION['person_id']; ?>">
                         <input type="text" id="comment" name="comment" placeholder="Comment here" style="width: 150px; color: 5d78c9; margin-right: 0px; text-align:left;">
                         <button type="submit" id="commentBtn" name="commentBtn" style="margin-left: 0px; background-color: #aabbee;  color: blue; border: 1px solid #aabbee; font-size: 15px"> 
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
