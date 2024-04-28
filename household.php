@@ -1,3 +1,31 @@
+<?php
+require("connect-db.php"); //include("connect-db.php"); start db server if wa
+require("db-household.php");
+
+session_start();
+?>
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') 
+{
+    
+        updatePhone($_POST['phone'], $_POST['person_id']);
+    
+}
+?>
+
+<?php
+// if ($_SERVER['REQUEST_METHOD'] == 'POST') 
+// {
+//     if (!empty($_POST['emailBtn'])) 
+//     {
+//         var_dump($_POST['email']);
+//         updateEmail($_POST['email'], $_POST['person_id']);
+//     }
+// }
+?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -19,13 +47,41 @@
 <body> 
     
 <?php include('header.html') ?>
+
 <div class="container">
   <div class="row g-3 mt-2">
     <div class="col">
       <h2>Household </h2>
       <h6>to do: code to join a household (if not done as part of initial sign up)<br>
-        otherwise display other members of the household<br>
-        option to delete a pet is here
+        otherwise, display other members of the household on this page<br>
+        include option to delete a pet 
+        <br> 
       </h6>
-    </div>  
-  </div>
+
+<!-- update email-->
+      <!-- <div class="card" style="width: 600px; margin-top:55px;margin-left:300px; text-align: center; padding:20px; background-color:#c7d5fc;border:7px #5d78c9; border-radius:10px;">
+                
+        <form method="post" action="household.php">          
+            <input type="hidden" name="person_id" id="person_id" value="<?php echo $_SESSION['person_id']; ?>">
+            <label for="email">Update Email:</label>
+            <input type="email" id="email" name="email" style="margin-left:10px" placeholder="Enter new email">
+            <button type="submit" id="emailBtn" name="emailBtn" style="color: #3250ab; text-align:left; border: 2px solid #c7d5fc; border-radius:  5px;">Update</button>
+        </form>
+    </div> -->
+<!-- update phone-->
+    <div class="card" style="width: 600px; margin-top:55px;margin-left:300px; text-align: center; padding:20px; background-color:#c7d5fc;border:7px #5d78c9; border-radius:10px;">
+            <form method="post" action="household.php">
+                <input type="hidden" name="person_id" id="person_id" value="<?php echo $_SESSION['person_id']; ?>">
+                <label for="phone">Update Phone Number:</label>
+                <input type="text" id="phone" name="phone" style="margin-left:10px"placeholder="Enter new phone number">
+                <button type="submit" id="phoneBtn" name="phoneBtn" style="color: #3250ab; text-align:left; border: 2px solid #c7d5fc; border-radius:  5px;">Update</button>
+            </form>
+        </div>
+    </div> 
+    
+    <div class="card" style="width: 600px; margin-top:55px;margin-left:300px; text-align: center; padding:20px; background-color:#c7d5fc;border:7px #5d78c9; border-radius:10px;">
+    <a href="removepet.php" style="margin:10px;" class="btn btn-lg">Remove a Pet</a>
+</div>
+  
+</body>
+</html>

@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
                       <form method="post" action="home.php">
                         <input type="hidden" name="report_id" id="report_id" value="<?php echo $rs['report_id']; ?>">
                         <input type="hidden" name="person_id" id="person_id" value="<?php echo $_SESSION['person_id']; ?>">
-                        <input type="text" id="comment" name="comment" placeholder="Comment here" style="width: 150px; margin-right: 0px; color: #e6ecff; text-align:left; border: 2px solid #c7d5fc">
+                        <input type="text" id="comment" name="comment" placeholder="Comment here" style="width: 150px; margin-right: 0px;  text-align:left; border: 2px solid #c7d5fc">
                         <button type="submit" id="commentBtn" name="commentBtn" style="margin-left: 0px; background-color: #aabbee;  color: blue; border: 1px solid #aabbee; font-size: 15px"> 
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
                               <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>

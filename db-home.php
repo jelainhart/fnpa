@@ -4,7 +4,7 @@
 function addComment($report_id, $person_id, $comment){
     //Comments(comment_id, report_id, person_id, text, date)
     global $db;
-    $query = "INSERT INTO Pets (report_id, person_id, text, date) VALUES (:report_id, :person_id, :comment , NOW())";
+    $query = "INSERT INTO comments (text, date, report_id, person_id) VALUES (:comment , NOW(), :report_id, :person_id)";
     
    try {
     $db->beginTransaction();
