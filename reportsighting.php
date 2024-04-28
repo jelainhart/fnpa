@@ -1,6 +1,8 @@
 <?php 
 require("connect-db.php");    // include("connect-db.php");
 require("db-reportsighting.php");
+
+session_start();
 ?>
 
 
@@ -73,10 +75,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
       <br>
   </div>
   
-  <input type="hidden" name="person_id" id="person_id" value="<?php echo $_SESSION['person_id']; ?>">
-  <div id="animal_desc">
+  
+  <form method="post" action="reportsighting.php" >
+    <div id="animal_desc">
     <h4>Animal Description</h4>
-  <form method="post" action="addpet.php" >
+    <input type="hidden" name="person_id" id="person_id" value="<?php echo $_SESSION['person_id']; ?>">
     <label for="species">Species:</label>
     <select id="species" name="species">
       <option value="dog">Dog</option>

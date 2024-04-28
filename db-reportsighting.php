@@ -5,11 +5,11 @@ function reportsighting($species, $breed, $fur_color, $fur_pattern, $eye_color, 
 {
    global $db;        // ensure proper data type before inserting it into a db
    
-   $Reports_query = "INSERT INTO Reports (person_id, animal_id, date, description) VALUES (:person_id, :animal_id, NOW(), :description)";  
-   $Found_reports_query = "INSERT INTO Found_reports (street_name, zip_code, city) VALUES (:street_name, :zip_code, :city)";
-   
    $animal_query = "INSERT INTO Animal (species, breed, fur_color, fur_pattern, eye_color, pet_size, additional_description) VALUES (:species, :breed, :fur_color, :fur_pattern, :eye_color, :pet_size, :additional_description)";
-   $lost_animal_query = "INSERT INTO Pets (animal_id, pet_condition) VALUES (:animal_id, :pet_condition)";
+   $lost_animal_query = "INSERT INTO lost_animal (animal_id, pet_condition) VALUES (:animal_id, :pet_condition)";
+
+   $Reports_query = "INSERT INTO Reports (person_id, animal_id, date, description) VALUES (:person_id, :animal_id, NOW(), :description)";  
+   $Found_reports_query = "INSERT INTO Found_reports (report_id, street_name, zip_code, city) VALUES (:report_id, :street_name, :zip_code, :city)";
 
    try {
     //Animal
@@ -27,46 +27,41 @@ function reportsighting($species, $breed, $fur_color, $fur_pattern, $eye_color, 
       $animal_id = $db->lastInsertId(); 
       $statement->closeCursor();
 
-      // Insert into lost_animal table
+      // insert into lost_animal table
       $statement2 = $db->prepare($lost_animal_query);
       $statement2->bindValue(':animal_id', $animal_id);
       $statement2->bindValue(':pet_condition', $pet_condition);
       $statement2->execute();
       $statement2->closeCursor();
 
-      $db->commit();
-   
-        //REPORT
-     $db->beginTransaction();//<--
-      // prepared statement
-      // pre-compile
-      $statement = $db->prepare($Reports_query);
+      //into reports
+      $statement3 = $db->prepare($Reports_query);
       // fill in the value
-      $statement->bindValue(':person_id', $person_id);
-      $statement->bindValue(':animal_id', $animal_id);                
-      $statement->bindValue(':description',$description);
+      $statement3->bindValue(':person_id', $person_id);
+      $statement3->bindValue(':animal_id', $animal_id);                
+      $statement3->bindValue(':description', $description);
       // exe
-      $statement->execute();
+      $statement3->execute();
       $report_id = $db->lastInsertId(); //<--
-      $statement->closeCursor();
+      $statement3->closeCursor();
+
+      //insert into found reports
+      $statement4 = $db->prepare($Found_reports_query);
+      $statement4->bindValue(':report_id', $report_id);
+      $statement4->bindValue(':street_name', $street_name);
+      $statement4->bindValue(':zip_code', $zip_code);
+      $statement4->bindValue(':city', $city);
+      $statement4->execute();
+      $statement4->closeCursor();
 
       
-      $statement2 = $db->prepare($Found_reports_query);
-      $statement2->bindValue(':report_id', $report_id);
-      $statement2->bindValue(':street_name', $street_name);
-      $statement2->bindValue(':zip_code', $zip_code);
-      $statement2->bindValue(':city', $city);
-      $statement2->execute();
-      $statement2->closeCursor();
+      $db->commit();} catch (PDOException $e) {
+        $db->rollBack();
+        echo "Error: " . $e->getMessage();
+     } catch (Exception $e) {
+        $db->rollBack();
+        echo "Error: " . $e->getMessage();
+     }
+  }
+  ?>
 
-      
-      $db->commit();
-   } catch (PDOException $e)
-   {
-      $e->getMessage();   // consider a generic message
-   } catch (Exception $e) 
-   {
-      $e->getMessage();   // consider a generic message
-   }
-
-}

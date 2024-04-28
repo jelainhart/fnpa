@@ -26,17 +26,32 @@ function addComment($report_id, $person_id, $comment){
     echo "Error: " . $e->getMessage();
  }
 }
+?>
+
+
+
+<?php
+function getMyPets($person_id)
+{
+    global $db;
+   $query = "SELECT nickname, species, breed, fur_color, fur_pattern, eye_color, pet_size, additional_description FROM pets NATURAL JOIN owns NATURAL JOIN is_part_of NATURAL JOIN people where person_id=:person_id;";
+   
+   $statement = $db->prepare($query); //compile
+   
+   $statement->bindValue(':person_id', $person_id);
+   $statement->execute();
+   $result = $statement->fetchAll(); //fetch() just retrieves only the first row
+   $statement->closeCursor(); 
+//if we want to use result must officially return it to form
+    return $result;
+}
+?>
 
 
 
 
 
-
-
-
-
-
-
+<?php
 function getRecentSightings()
 {
    //reuse instance of db

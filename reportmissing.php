@@ -1,15 +1,20 @@
 <?php 
 require("connect-db.php");    // include("connect-db.php");
 require("db-reportmissing.php");
+
+session_start();
 ?>
 
+
+<?php $ownPets = getPets($_SESSION["person_id"]); 
+//var_dump($ownPets)?>
 
 <?php 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
 {
   if (!empty($_POST['reportmissingBtn']))    // $_GET['....']
   {
-      reportmissing($_POST['person_id'], $_POST['animal_id'],$_POST['description'],$_POST['monetary_reward']);
+      reportmissing($_POST['person_id'], $_POST['animal_id'], $_POST['description'], $_POST['monetary_rewards']);
   }
 }
   ?>
@@ -67,20 +72,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
 
 <body> 
     
-  <?php include('header.html') ?>
+<?php include('header.html') ?>
 <div class="container">
   <div class="row g-3 mt-2">
     <div class="col">
-      <h2>Report Your Lost Pet</h2>
+      <h2>Report Your Lost Pet </h2>
     </div>  
   </div>
-<!-- TODO!!!!! get the user's person_id, create dropdown of the user's pets for them to choose which is lost -->
+<!-- TODO!!!!! get the user's person_id (session?), create dropdown of the user's pets for them to choose which is lost -->
   <form method="post" action="reportmissing.php"> 
     
     <input type="hidden" name="person_id" id="person_id" value="<?php echo $_SESSION['person_id']; ?>">
-    <label for="animal_name">Animal Name:</label>
-    <select id="animal_name" name="animal_name">
-        <option value="animal_id">nickname</option>
+
+    <label for="animal_id">Pet Name:</label>
+    <select name="animal_id" id="animal_id">
+    <?php foreach ($ownPets as $pet): ?>
+        <option value="<?php echo $pet['animal_id']; ?>"><?php echo $pet['nickname']; ?></option><!--id as value, nickname for user to select -->
+    <?php endforeach; ?>
     </select>
     <br><br>
 
@@ -88,8 +96,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
     <textarea id="description" name="description" rows="4" cols="50"></textarea>
     <br><br>
 
-    <label for="monetary_reward">Monetary Reward ($):</label>
-    <input type="number" id="monetary_reward" name="monetary_reward" value="0" min="0"><br><br>
+    <label for="monetary_rewards">Monetary Reward ($):</label>
+    <input type="number" id="monetary_rewards" name="monetary_rewards" value="0" min="0"><br><br>
 
     <input type="submit" value="Submit" id="reportmissingBtn" name="reportmissingBtn" class="btn btn-dark">
    </form>

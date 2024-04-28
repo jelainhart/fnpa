@@ -8,7 +8,7 @@ function addPet($species, $breed, $fur_color, $fur_pattern, $eye_color, $pet_siz
 
    try {
       $db->beginTransaction();
-      // Insert into Animal table
+      // insert into Animal table
       $statement = $db->prepare($animal_query);
       $statement->bindValue(':species', $species);
       $statement->bindValue(':breed', $breed);
@@ -21,7 +21,7 @@ function addPet($species, $breed, $fur_color, $fur_pattern, $eye_color, $pet_siz
       $animal_id = $db->lastInsertId(); 
       $statement->closeCursor();
 
-      // Insert into Pets table
+      // insert into Pets table
       $statement2 = $db->prepare($pets_query);
       $statement2->bindValue(':animal_id', $animal_id);
       $statement2->bindValue(':nickname', $nickname);
