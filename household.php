@@ -35,10 +35,11 @@ $household = getHousehold($_SESSION["person_id"]);
   <link rel="stylesheet" href="rstyles.css">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">   
-  
+  <style> 
+  </style>
   </head>
 
-<body> 
+<body style="background-color: #5d78c9"> 
     
 <?php include('header.html') ?>
 
