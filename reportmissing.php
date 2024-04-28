@@ -36,10 +36,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
       <h2>Register a Pet</h2>
     </div>  
   </div>
+<!-- TODO!!!!! get the user's person_id, create dropdown of the user's pets for them to choose which is lost -->
+  <form method="post" action="reportmissing.php"> 
+    <label for="animal_name">Animal Name:</label>
+    <select id="animal_name" name="animal_name">
+        <option value="animal_id">nickname</option>
+    </select>
+    <br><br>
 
-  <form method="post" action="reportmissing.php" >
+    <label for="description">Description:</label><br>
+    <textarea id="description" name="description" rows="4" cols="50"></textarea>
+    <br><br>
+
+    <label for="monetary_reward">Monetary Reward:</label>
+    <input type="number" id="monetary_reward" name="monetary_reward" value="0" min="0"><br><br>
 
     <input type="submit" value="Submit" id="reportmissingBtn" name="reportmissingBtn" class="btn btn-dark">
-  </form>
+   </form>
 </body>
+
 </html>
