@@ -221,6 +221,7 @@ require("searchanimals-db.php"); // Include the file containing search functiona
                 <option value="Cymric, or Manx Longhair">Cymric</option>
                 <option value="Cyprus">Cyprus</option>
                 <option value="Devon Rex">Devon Rex</option>
+                <option value="Domestic Shorthair">Domestic Shorthair</option>
                 <option value="Donskoy, or Don Sphynx">Donskoy</option>
                 <option value="Dragon Li">Dragon Li</option>
                 <option value="Dwarf cat, or Dwelf">Dwarf cat</option>
