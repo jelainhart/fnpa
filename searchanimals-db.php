@@ -5,11 +5,30 @@ function searchPets($criteria) {
     global $db;
     //print_r($criteria);
 
-    $sql = "SELECT A.*, P.nickname AS pet_nickname, L.pet_condition, S.nickname AS stray_nickname, S.zip_code, S.sociability
+    $sql = "SELECT A.*, 
+            P.nickname AS pet_nickname, 
+            L.pet_condition, 
+            S.nickname AS stray_nickname, 
+            S.zip_code, 
+            S.sociability,
+            Pe.first_name,
+            Pe.last_name,
+            Pe.primary_phone_number,
+            Pe.email_address,
+            R.date,
+            R.description,
+            Fr.street_name AS found_street_name,
+            Fr.zip_code AS found_zip_code,
+            Fr.city AS found_city,
+            Lr.monetary_rewards
             FROM Animal A
             LEFT JOIN Pets P ON A.animal_id = P.animal_id
             LEFT JOIN Lost_animal L ON A.animal_id = L.animal_id
             LEFT JOIN Stray S ON A.animal_id = S.animal_id
+            LEFT JOIN Reports R ON A.animal_id = R.animal_id
+            LEFT JOIN People Pe ON R.person_id = Pe.person_id
+            LEFT JOIN Found_reports Fr ON R.report_id = Fr.report_id
+            LEFT JOIN Lost_reports Lr ON R.report_id = Lr.report_id
             WHERE 1";
 
     if ($criteria['species'] !== "Any") {
@@ -33,7 +52,6 @@ function searchPets($criteria) {
 
     $statement = $db->prepare($sql);
 
-    // Bind parameters
     if ($criteria['species'] !== "Any") {
         $statement->bindValue(':species', $criteria['species']);
     }
