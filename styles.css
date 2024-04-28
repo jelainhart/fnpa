@@ -39,6 +39,23 @@ input[type=submit]:hover {
   color: rgb(90, 0, 0);
   font-size: 0.9em;
 }
+
+.card {
+  background-color: #ccc;
+  width: 200px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.card-container {
+  display: flex; 
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 0 auto;
+  max-width: 1200px;
+}
     
 html{ height:100%; }
 
@@ -52,3 +69,4 @@ footer {
   color: WhiteSmoke;
   padding: 10px;
 }
+

@@ -273,6 +273,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
         <option value="Cymric, or Manx Longhair">Cymric</option>
         <option value="Cyprus">Cyprus</option>
         <option value="Devon Rex">Devon Rex</option>
+        <option value="Domestic Shorthair">Domestic Shorthair</option>
         <option value="Donskoy, or Don Sphynx">Donskoy</option>
         <option value="Dragon Li">Dragon Li</option>
         <option value="Dwarf cat, or Dwelf">Dwarf cat</option>
@@ -342,7 +343,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
         <option value="York Chocolate">York Chocolate</option>
       </optgroup>
     </select><br><br>
-    
+
     <label for="fur_color">Fur Color:</label>
     <select id="fur_color" name="fur_color">
       <option value="White">White</option>
