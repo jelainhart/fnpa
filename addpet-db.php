@@ -1,10 +1,11 @@
 <?php
-function addPet($species, $breed, $fur_color, $fur_pattern, $eye_color, $pet_size, $additional_description, $nickname)
+function addPet($household_id, $species, $breed, $fur_color, $fur_pattern, $eye_color, $pet_size, $additional_description, $nickname)
 {
    global $db;
 
    $animal_query = "INSERT INTO Animal (species, breed, fur_color, fur_pattern, eye_color, pet_size, additional_description) VALUES (:species, :breed, :fur_color, :fur_pattern, :eye_color, :pet_size, :additional_description)";
    $pets_query = "INSERT INTO Pets (animal_id, nickname) VALUES (:animal_id, :nickname)";
+   $owns_query = "INSERT INTO Owns (animal_id, household_id) values (:animal_id, :household_id)";
 
    try {
       $db->beginTransaction();
@@ -28,6 +29,13 @@ function addPet($species, $breed, $fur_color, $fur_pattern, $eye_color, $pet_siz
       $statement2->execute();
       $statement2->closeCursor();
 
+      //insert into Owns table
+      $statement3 = $db->prepare($owns_query);
+      $statement3->bindValue(':animal_id', $animal_id);
+      $statement3->bindValue(':household_id', $household_id);
+      $statement3->execute();
+      $statement3->closeCursor();
+
       $db->commit();
 
    } catch (PDOException $e) {
@@ -39,3 +47,18 @@ function addPet($species, $breed, $fur_color, $fur_pattern, $eye_color, $pet_siz
    }
 }
 ?>
+<?php
+function getHId($person_id)//get all member of the household the user is in
+{ 
+    global $db;
+    $query = "SELECT household_id FROM is_part_of WHERE person_id = :person_id ;";
+    $statement = $db->prepare($query); //compile
+    
+    $statement->bindValue(':person_id', $person_id);
+    $statement->execute();
+    $result = $statement->fetch(); //fetch() just retrieves only the first row
+    $statement->closeCursor(); 
+ //if we want to use result must officially return it to form
+     return $result;
+}
+// ?>

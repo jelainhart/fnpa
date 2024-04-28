@@ -45,7 +45,7 @@ $household = getHousehold($_SESSION["person_id"]);
 <div class="container">
   <div class="row g-3 mt-2">
     <div class="col">
-      <h2>Household </h2>
+      <h2>Manage Household</h2>
       <h6>to do: code to join a household (if not done as part of initial sign up)<br>
         
         <br> 
