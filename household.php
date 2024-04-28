@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       <h2>Household </h2>
       <h6>to do: code to join a household (if not done as part of initial sign up)<br>
         otherwise, display other members of the household on this page<br>
-        include option to delete a pet 
+        
         <br> 
       </h6>
 
