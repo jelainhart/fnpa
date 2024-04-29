@@ -1,30 +1,9 @@
 <?php 
 require("connect-db.php");    // include("connect-db.php");
 require("login-db.php");
+session_start();  
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">   
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">  <!-- required to handle IE -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">  
-  <title>Log In</title> 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">  
-  <link rel="stylesheet" href="styles.css" /> 
-</head>
-<body>
-  
-  <?php include('header2.html') ?>
-  <div >
-  <div style="width: 500px; margin-top: 10px; margin-left:50px; padding:20px; display: inline-block;">  
-    <h1>Log in</h1>
-    <form action="login.php" method="post">     
-      Email: <input type="text" name="email" required /> <br/>
-      Password: <input type="password" name="pwd" required /> <br/>
-      <input type="submit" value="Submit" class="btn" />
-    </form>
-  
- 
+
 <?php 
 /*
 echo "password = demo <br />";
@@ -35,6 +14,7 @@ echo '<br/> password_verify =' . password_verify("demo", $hash) . "<br/>";
 function authenticate()
 {
    global $mainpage;
+   $mainpage = "home.php";  
 
    // Assume there exists a hashed password for a user (username='demo', password='demo') 
    // in a database or file and we've retrieved and assigned it to a $hash variable 
@@ -43,9 +23,11 @@ function authenticate()
    if ($_SERVER['REQUEST_METHOD'] == 'POST')
    {
       $request = getLogIn($_POST['email']);
+      $pid = getPersonID($_POST['email']);
       $hash = null;
       if($request != null){
         $hash = $request['pwd'] ;
+        $pid = $pid['person_id'] ;
           
         // htmlspecialchars() stops script tags from being able to be executed and renders them as plaintext
         $pwd = htmlspecialchars($_POST['pwd']);      
@@ -62,6 +44,8 @@ function authenticate()
       
         if (password_verify($pwd, $hash))
         {  
+          // set session attributes
+          $_SESSION['person_id'] = $pid;
           // successfully login, redirect a user to the main page
           header("Location: ".$mainpage);
           
@@ -75,12 +59,34 @@ function authenticate()
          echo "<span class='msg'>Username and password do not match our record</span> <br/>";
    }	
 }
-
-// $mainpage = "form.php";       // handle form data on a separated page
-$mainpage = "home.php";   
+ 
 authenticate();
 
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">   
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">  <!-- required to handle IE -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">  
+  <title>Log In</title> 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">  
+  <link rel="stylesheet" href="styles.css" /> 
+</head>
+<body>
+  
+  <?php include('header2.html') ?>
+
+  <div>
+  <div style="width: 500px; margin-top: 10px; margin-left:50px; padding:20px; display: inline-block;">  
+    <h1>Log in</h1>
+    <form action="login.php" method="post">     
+      Email: <input type="text" name="email" required /> <br/>
+      Password: <input type="password" name="pwd" required /> <br/>
+      <input type="submit" value="Submit" class="btn" />
+    </form>
+  
+ 
     </div>
     
     <div style="width: 350px; margin-left:50px; text-align: center; padding:10px; display: inline-block;">

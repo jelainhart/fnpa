@@ -2,9 +2,10 @@
 require("connect-db.php"); //include("connect-db.php"); start db server if wa
 require("db-home.php");
 
-//<!--------------------------- Session ID CURRENTLY HARDCODED ------------------>
 session_start();
-$_SESSION["person_id"] = "2"
+//$_SESSION["person_id"] = "2" HARDCODED
+$_SESSION["person_id"] = $_SESSION["person_id"][0];
+
 ?>
 
 <?php 

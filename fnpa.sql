@@ -114,6 +114,14 @@ PRIMARY KEY(report_id));
 -- Insert data to the tables as if the site has been in use for a month
 INSERT INTO login(email, pwd)
 VALUE ('demo@demo.com', '$2y$10$7yMQ/KY5uHu1CwMBdptV5O12zpR9jJA4WcxAZxCT6zXIjyg8G4AWa');
+INSERT INTO login(email, pwd)
+VALUES ('sonyas@gmail.com', '$2y$10$3TR4EASTdlIDN/l0xFh67ebYTcaxrZaJc6UJViLFxqcc.n7kld3tO');
+INSERT INTO login(email, pwd)
+VALUES ('wow@gmail.com', '$2y$10$o3wCcKibvuMQkcg6n7QopuKWLj2PAjJeMbJZzWvpKHq28LO7Cs9cy');
+INSERT INTO login(email, pwd)
+VALUES ('jessiiica@gmail.com', '$2y$10$5IrnajSLV.StwLDAiFWBo.x2XMK3Jhd1rXHmm7/aEfOqdU.v4qH8K');
+INSERT INTO login(email, pwd)
+VALUES ('sparklez213@gmail.com', '$2y$10$oE1HKmuyHMGpJVOSg5migezF/rmUXjBbkSGxEzRUJ6bDn3lExtOKG');
 
 INSERT INTO Animal (species, breed, fur_color, fur_pattern, eye_color, pet_size, additional_description) VALUES
 ('Dog', 'Cocker Spaniel', 'Medium Brown', 'Patches', 'Brown', 'Medium', 'He always having the zoomies and likes to wiggle out of his harness'),
