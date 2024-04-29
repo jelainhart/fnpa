@@ -10,7 +10,7 @@ function reportsighting($species, $breed, $fur_color, $fur_pattern, $eye_color, 
 
    $Reports_query = "INSERT INTO Reports (person_id, animal_id, date, description) VALUES (:person_id, :animal_id, NOW(), :description)";  
    $Found_reports_query = "INSERT INTO Found_reports (report_id, street_name, zip_code, city) VALUES (:report_id, :street_name, :zip_code, :city)";
-
+    $pet_sightings_query= "INSERT INTO pet_sightings (report_id, animal_id) VALUES (:report_id, :animal_id)";
    try {
     //Animal
       $db->beginTransaction();
@@ -51,6 +51,13 @@ function reportsighting($species, $breed, $fur_color, $fur_pattern, $eye_color, 
       $statement4->bindValue(':street_name', $street_name);
       $statement4->bindValue(':zip_code', $zip_code);
       $statement4->bindValue(':city', $city);
+      $statement4->execute();
+      $statement4->closeCursor();
+
+      //insert into pet_sightings
+      $statement4 = $db->prepare($pet_sightings_query);
+      $statement4->bindValue(':report_id', $report_id);
+      $statement4->bindValue(':animal_id', $animal_id);
       $statement4->execute();
       $statement4->closeCursor();
 

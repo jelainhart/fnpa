@@ -109,6 +109,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
 
                 <div class="card" style="width: 450px; margin-top: 10px; margin-left:300px; text-align: center; padding:20px; background-color:#c7d5fc;border:7px #5d78c9; border-radius:10px;">
                 <h3> My Pets </h3>
+                
+
                 <?php foreach ($myPets as $mp): ?>
                   <div class="card" style="width: 390px; padding:20px; background-color:#899fe0;text-align: center; border:7px ; border-radius:10px;">
                     <p><b><?php echo $mp['nickname']; ?> </b></p>

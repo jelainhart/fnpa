@@ -9,16 +9,15 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
     
-        if(!empty($_POST['deleteBtn'])){
             removePet($_POST['animal_id']);
-        }
+    
     
 }
 ?>
 
 <?php 
 $ownPets = getPets($_SESSION["person_id"]); 
-var_dump($ownPets);
+//var_dump($ownPets);
 ?>
 
 
@@ -40,6 +39,8 @@ var_dump($ownPets);
   </head>
 
 <body> 
+    
+  <?php include('header.html') ?>
 <form method="post" action="removepet.php">
     <label for="phone">Remove Pet From Household:</label>
     <select name="animal_id" id="animal_id">

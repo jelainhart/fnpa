@@ -31,10 +31,18 @@ function addComment($report_id, $person_id, $comment){
 <?php
 function getMyPets($person_id)
 {
-    global $db;
-   $query = "SELECT pets.nickname, animal.species, animal.breed, animal.fur_color, animal.fur_pattern, animal.eye_color, animal.pet_size, animal.additional_description FROM `pets` JOIN animal ON animal.animal_id=pets.animal_id JOIN owns ON animal.animal_id=owns.animal_id JOIN is_part_of ON owns.household_id = is_part_of.household_id JOIN people on people.person_id = is_part_of.person_id where people.person_id=:person_id;";
-   $statement = $db->prepare($query); //compile
+   global $db;
    
+   $query = "SELECT pets.nickname, animal.species, animal.breed, animal.fur_color, animal.fur_pattern, animal.eye_color, animal.pet_size, animal.additional_description FROM `pets` JOIN animal ON animal.animal_id=pets.animal_id JOIN owns ON animal.animal_id=owns.animal_id JOIN is_part_of ON owns.household_id = is_part_of.household_id JOIN people on people.person_id = is_part_of.person_id where people.person_id=:person_id;";
+   $query2 = "DELIMITER $$
+   CREATE PROCEDURE getHouseholdPets()
+   BEGIN
+       SELECT household_name, nickname 
+   FROM Household NATURAL JOIN Owns NATURAL JOIN Pets;
+   END$$
+   DELIMITER ;
+   ";
+   $statement = $db->prepare($query); //compile
    $statement->bindValue(':person_id', $person_id);
    $statement->execute();
    $result = $statement->fetchAll(); //fetch() just retrieves only the first row
@@ -53,7 +61,7 @@ function getRecentSightings()
 {
    //reuse instance of db
    global $db;
-   $query = "SELECT species, breed, fur_color, fur_pattern, eye_color, pet_size, pet_condition, additional_description, street_name, zip_code, city, email_address, report_id FROM `reports` natural join pet_sightings natural join animal natural join lost_animal natural join people natural join found_reports ORDER BY date DESC LIMIT 3";
+   $query = "SELECT species, breed, fur_color, fur_pattern, eye_color, pet_size, pet_condition, additional_description, street_name, zip_code, city, email_address, report_id FROM `reports` natural join pet_sightings natural join animal natural join lost_animal natural join people natural join found_reports ORDER BY report_id DESC LIMIT 3";
    $statement = $db->prepare($query); //compile
    $statement->execute();
    $result = $statement->fetchAll(); //fetch() just retrieves only the first row

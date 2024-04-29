@@ -1,6 +1,7 @@
 <?php 
 require("connect-db.php");    // include("connect-db.php");
 require("addpet-db.php");
+session_start();
 ?>
 
 
@@ -9,11 +10,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
 {
   if (!empty($_POST['addPetBtn']))    // $_GET['....']
   {
-      addPet($_POST['species'], $_POST['breed'], $_POST['fur_color'], $_POST['fur_pattern'], $_POST['eye_color'], $_POST['pet_size'], $_POST['additional_description'], $_POST['nickname']);
+      addPet($_POST['household_id'],$_POST['species'], $_POST['breed'], $_POST['fur_color'], $_POST['fur_pattern'], $_POST['eye_color'], $_POST['pet_size'], $_POST['additional_description'], $_POST['nickname']);
   }
 }
   ?>
 
+<?php $hhid = getHId($_SESSION["person_id"]); ?>
 
 
 
@@ -76,6 +78,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
   </div>
 
   <form method="post" action="addpet.php" >
+    
+    <input type="hidden" name="household_id" id="houeshold_id" value="<?php echo $hhid['household_id']; ?>">
     <label for="nickname">Nickname:</label>
         <input type="text" id="nickname" name="nickname"><br><br>
 
