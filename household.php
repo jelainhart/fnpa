@@ -3,6 +3,8 @@ require("connect-db.php"); //include("connect-db.php"); start db server if wa
 require("db-household.php");
 
 session_start();
+//$sess = $_SESSION['person_id'];
+//echo "session $sess";
 ?>
 
 <?php

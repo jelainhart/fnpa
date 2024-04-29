@@ -1,3 +1,4 @@
+<?php session_start(); // make sessions available ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,6 @@
 </head>
 <body>
 
-<?php session_start(); // make sessions available ?>
 
 <?php
 // Set session variables can be removed by specifying their element name to unset() function.

@@ -4,7 +4,9 @@ require("db-home.php");
 
 session_start();
 //$_SESSION["person_id"] = "2" HARDCODED
-$_SESSION["person_id"] = $_SESSION["person_id"][0];
+$_SESSION["person_id"] = $_SESSION["person_id"];
+//$sess = $_SESSION['person_id'];
+//echo "session $sess";
 
 ?>
 
