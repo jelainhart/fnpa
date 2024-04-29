@@ -62,6 +62,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')   // GET
   <?php include('header.html') ?>
   <div class="container">
     <h1 style="margin-top:12px; font-size: 300%">Welcome! </h1> 
+    <div style="float:center; padding:10px;">    
+      <form action="logout.php" method="get">
+        <input type="submit" value="Log out" />
+      </form>
+    </div>  
   </div>
 
   <div class="container-fluid">
